@@ -1,0 +1,53 @@
+Java Coding Questions (50 Questions)
+
+
+1. Remove duplicates from a sorted array (in-place)
+2. Move all zeros to the end
+3. Rotate array by `k` steps
+4. Find the majority element (> n/2 times)
+5. Two sum in sorted array (return indices)
+6. Find missing number from 1 to N
+7. Find the element with maximum frequency
+8. Check if array is a palindrome
+9. Find second largest element
+10. Merge two sorted arrays (without using extra space)
+11. Check if two strings are anagrams
+12. Reverse a string without using built-in methods
+13. Check if a string is a palindrome (iterative and recursive)
+14. Count vowels and consonants
+15. Find the first non-repeating character
+16. Implement `strStr()` (index of first occurrence)
+17. Remove all duplicate characters from a string
+18. Compress a string (like run-length encoding)
+19. Check if two arrays are equal
+20. Longest common prefix
+21. Convert lowercase string to uppercase manually
+22. Count number of words in a sentence
+23. Reverse digits of an integer (with/without overflow)
+24. Check if a number is a palindrome
+25. Check if a number is a power of 2
+26. Count digits in a number
+27. Find GCD and LCM
+28. Check for Armstrong number
+29. Check if two arrays are equal
+30. Print star triangle pattern
+31. Sum of digits of a number
+32. Find all prime numbers in a range
+33. Implement overloading concept
+34. Factorial of a number
+35. Power of a number (`a^b`)
+36. Valid parentheses (using Stack)
+37. Implement Stack using array
+38. Implement Queue using array
+39. Reverse a linked list
+40. Detect a cycle in linked list (Floyd's algorithm)
+41. Create a class `Car` with fields, constructor, and method to display details
+42. Demonstrate constructor overloading
+43. Demonstrate method overloading with different parameters
+44. Create a class hierarchy: `Animal -> Dog`, show inheritance
+45. Create an abstract class `Shape` and subclass `Circle` with area method
+46. Create an interface `Drawable` and implement it in a class
+47. Demonstrate `this` keyword in constructor
+48. Create a class that uses a static method and variable
+49. Handle divide-by-zero exception
+50. Handle `NullPointerException`
