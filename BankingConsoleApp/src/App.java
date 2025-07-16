@@ -452,7 +452,6 @@ public class App {
             }
             else{
                 System.out.println("Invalid output");
-                break;
             }
         }
         }
