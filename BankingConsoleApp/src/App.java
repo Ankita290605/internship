@@ -77,29 +77,29 @@ class SavingAccount extends Bank {
         return false;
     }
 
-    public void editProfile(int choice, Scanner scanner) {
-        scanner.nextLine();
+    public void editProfile(int choice, Scanner sc) {
+        sc.nextLine();
         switch (choice) {
             case 1 -> {
                 System.out.print("Enter new name: ");
-                name = scanner.nextLine();
+                name = sc.nextLine();
             }
             case 2 -> {
                 System.out.print("Enter new age: ");
-                age = scanner.nextInt();
+                age = sc.nextInt();
             }
             case 3 -> {
                 System.out.print("Enter new email: ");
-                email = scanner.nextLine();
+                email = sc.nextLine();
             }
             case 4 -> {
                 System.out.print("Enter new contact: ");
-                contact = scanner.nextLong();
+                contact = sc.nextLong();
             }
             case 5 -> {
                 System.out.print("Enter new address: ");
                 scanner.nextLine();
-                address = scanner.nextLine();
+                address = sc.nextLine();
             }
             default -> System.out.println("Invalid option.");
         }
@@ -169,29 +169,29 @@ class CurrentAccount extends Bank {
         return true;
     }
 
-    public void editProfile(int choice, Scanner scanner) {
-        scanner.nextLine();
+    public void editProfile(int choice, Scanner sc) {
+        sc.nextLine();
         switch (choice) {
             case 1 -> {
                 System.out.print("Enter new name: ");
-                name = scanner.nextLine();
+                name = sc.nextLine();
             }
             case 2 -> {
                 System.out.print("Enter new age: ");
-                age = scanner.nextInt();
+                age = sc.nextInt();
             }
             case 3 -> {
                 System.out.print("Enter new email: ");
-                email = scanner.nextLine();
+                email = sc.nextLine();
             }
             case 4 -> {
                 System.out.print("Enter new contact: ");
-                contact = scanner.nextLong();
+                contact = sc.nextLong();
             }
             case 5 -> {
                 System.out.print("Enter new address: ");
                 scanner.nextLine();
-                address = scanner.nextLine();
+                address = sc.nextLine();
             }
             default -> System.out.println("Invalid option.");
         }
