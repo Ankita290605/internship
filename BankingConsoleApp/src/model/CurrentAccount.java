@@ -1,57 +1,72 @@
 package model;
-
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class CurrentAccount extends Bank {
-    private int overdraftLimit = 500000;
 
-    public CurrentAccount(String name, int age, String email, long contact, String address, String accountType, long accountNumber) {
-        super(name, age, email, contact, address, accountType, accountNumber);
+    public CurrentAccount(String name, int age, String email, long contact, String address, String accountType, long accountNumber, int overDraft) {
+        super(name, age, email, contact, address, accountType, accountNumber, overDraft);
     }
+    
+    LocalDate currentDate = LocalDate.now();
+    LocalTime currentTime = LocalTime.now();
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+
+    String formattedTime = currentTime.format(formatter);
 
     public void deposit(int amount) {
-        if (overdraftLimit < 500000) {
-            int needed = 500000 - overdraftLimit;
+        if (overDraft < 200000) {
+            int needed = 200000 - overDraft;
             if(amount <= needed){
-                overdraftLimit += amount;
-                addPassbookEntry("Deposited in OD: "+ amount +" | OD Limit: "+ overdraftLimit);
+            	overDraft += amount;
+                //addPassbookEntry("Deposited in OD: "+ amount +" | OD Limit: "+ overDraft);
+            	addPassbookEntry(currentDate, formattedTime, amount+"(in OD)", "----" , balance, overDraft );
             } 
             else{
-                overdraftLimit = 500000;
-                balance += (amount - needed);
-                addPassbookEntry("OD filled: "+ needed +" | Credited: "+ (amount - needed) +" | Balance: "+ balance);
+            	overDraft = 200000;
+                balance = balance + (amount - needed);
+                addPassbookEntry(currentDate, formattedTime, (amount-needed)+"& OD", "----" , balance, overDraft );
             }
         } 
         else {
             balance += amount;
-            addPassbookEntry("Credited "+ amount +" | Balance: "+ balance);
+            addPassbookEntry(currentDate, formattedTime, String.valueOf(amount), "----" , balance, overDraft );
         }
-        System.out.println("Amount deposited.");
+        System.out.println("Amount deposited successfully. Your Bank Balance: "+balance+" OD: "+overDraft);
     }
 
-    public boolean withdraw(int amount) {
+    public void withdraw(int amount) {
         if (balance >= amount) {
             balance -= amount;
-            addPassbookEntry("Debited " + amount + " | Balance: " + balance);
-            return true;
+            addPassbookEntry(currentDate, formattedTime, "----", String.valueOf(amount), balance, overDraft);
+            System.out.println("Amount withdrawal successfully. Balance remaining: "+balance+" Remaining OD: "+overDraft);
         } 
-        else if (amount <= balance + overdraftLimit) {
+        else if (amount <= balance + overDraft) {
             int fromOD = amount - balance;
-            overdraftLimit -= fromOD;
+            overDraft -= fromOD;
             balance = 0;
-            addPassbookEntry("Debited using OD " + amount + " | Remaining OD: " + overdraftLimit);
-            return true;
+            addPassbookEntry(currentDate, formattedTime, "----", amount+"(using OD)", balance, overDraft);
+            System.out.println("Amount withdrawal successfully. Balance remaining: "+balance+" Remaining OD: "+overDraft);
+           
         }
-        return false;
+        else {
+        	System.out.println("Withdrawal failed! Less amount and OD limit");
+        }
+       
     }
 
-    public boolean transferTo(long toAccount, int amount) {
-        return withdraw(amount) && logTransfer(toAccount, amount);
-    }
-
-    private boolean logTransfer(long toAccount, int amount) {
-        addPassbookEntry("Transferred "+ amount +" to A/C "+ toAccount);
-        return true;
+    public void transferTo(long toAccount, int amount) {
+    	if (amount <= balance ) {
+            balance -= amount;
+            addPassbookEntry(currentDate, formattedTime, "----", (amount+"(Transfered)"), balance, overDraft);
+            System.out.println("Money transfered successfully! Remaining Balance is: "+balance);
+        }
+        else {
+        	System.out.println("Insufficient Amount");
+        }
     }
 
     public void editProfile(int choice, Scanner sc) {
@@ -82,13 +97,17 @@ public class CurrentAccount extends Bank {
         }
         System.out.println("Profile updated.");
     }
-
-    public void printPassbook(){
-        System.out.println("----- Current Account Passbook -----");
-        System.out.println("Name: "+ name +" | A/C No: "+ accountNumber +" | Balance: "+ balance +" | OD: "+ overdraftLimit);
-        for (String entry : passbook) {
+ 
+    public void printPassbook() {
+    	System.out.printf("----------------------------------------------------------------------------------------------------%n");
+    	System.out.printf("                            Passbook Details      %n");
+    	System.out.println("Account owner: "+name+" Account number: "+accountNumber+" Account Type: "+accountType);
+    	System.out.printf("----------------------------------------------------------------------------------------------------%n");
+    	System.out.printf("%-13s | %-13s | %-15s | %-16s | %-13s | %-13s | %n", "DATE", "TIME", "DEPOSITE", "WITHDRAWAL", "BALANCE", "OVERDRAFT");
+    	System.out.printf("----------------------------------------------------------------------------------------------------%n");
+    	for (String entry : passbook) {
             System.out.println(entry);
         }
-        System.out.println("------------------------------------");
+    	System.out.printf("----------------------------------------------------------------------------------------------------%n");
     }
 }
