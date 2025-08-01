@@ -1,0 +1,105 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background: white;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  transition: 0.3s;
+  background: url('https://img.freepik.com/free-vector/vintage-clocks-pattern_1085-156.jpg?semt=ais_hybrid&w=740&q=80');
+  background-size: cover;
+}
+h1{
+  color: rgb(147, 147, 147);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+body.dark h1{
+  color: white;
+
+}
+body.dark {
+  background: #111;
+  color: white;
+  background: url('https://media.istockphoto.com/id/1185407099/vector/white-clock-on-a-black-background-with-a-perspective-and-a-luminous-minute-arrow.jpg?s=612x612&w=0&k=20&c=Vsy1OuwaFNjPSxwiDtScQuXwQyuu2_EalnasKgzJzZ4=');
+  background-size: cover;
+}
+
+.theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 20px;
+  padding: 8px;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+}
+
+body.dark .analog-clock{
+  background-color: black;
+}
+
+.analog-clock {
+  width: 300px;
+  height: 300px;
+  background-color: white;
+  border: 6px solid gray;
+  border-radius: 50%;
+  position: relative;
+}
+
+.number {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: rotate(calc(30deg * var(--i)))
+             translate(-50%, -130px)
+             rotate(calc(-30deg * var(--i)));
+  font-size: 18px;
+  font-weight: bold;
+  transform-origin: center;
+}
+
+.hand {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: bottom center;
+}
+
+.hour {
+  width: 6px;
+  height: 70px;
+  background: rgb(66, 59, 114);
+}
+
+.minute {
+  width: 4px;
+  height: 100px;
+  background: teal;
+}
+
+.second {
+  width: 2px;
+  height: 110px;
+  background: red;
+}
+
+
+
+.center-dot {
+  width: 12px;
+  height: 12px;
+  background: black;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
