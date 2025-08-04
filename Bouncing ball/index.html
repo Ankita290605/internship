@@ -26,38 +26,45 @@
         canvas.height = 600;
         let balls = [];
         class Ball {
-            constructor(x, y, radius = 15) {
+            constructor(x, y, s = 15) {
                 this.x = x;
                 this.y = y;
-                this.radius = radius;
-                this.color = `hsl(${Math.random() * 360}, 70%, 60%)`;
-                const angle = Math.random() * 2 * Math.PI; 
+                this.s = s;
+                this.color = `rgb(${Math.random() * 360}, ${Math.random() * 360}, ${Math.random() * 360})`;
+                const angle = Math.random() * 2 * 3.14; 
                 const speed = 3;
                 this.vx = Math.cos(angle) * speed;
                 this.vy = Math.sin(angle) * speed;
-
+                this.rotation = 0;
+                this.rotationSpeed = (Math.random()-0.5) * 0.2;
             }
-            draw(){
-                ctx.beginPath();
+             draw() {
+                ctx.save();
+                ctx.translate(this.x + this.s / 2, this.y + this.s / 2); 
+                ctx.rotate(this.rotation);
                 ctx.fillStyle = this.color;
-                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fill();
+                ctx.fillRect(-this.s / 2, -this.s / 2, this.s, this.s);
+                ctx.restore();
             }
-            update(){
+        
+            update() {
                 this.x += this.vx;
                 this.y += this.vy;
-                if(this.x + this.radius > canvas.width || this.x - this.radius < 0){
+                if (this.x + this.s > canvas.width || this.x < 0) {
                     this.vx *= -1;
                 }
-                if(this.y + this.radius > canvas.height || this.y - this.radius < 0){
+                if (this.y + this.s > canvas.height || this.y < 0) {
                     this.vy *= -1;
                 }
+
+                this.rotation += this.rotationSpeed;
                 this.draw();
             }
-            
+
         }
         canvas.addEventListener("click", (e) => {
             const rect = canvas.getBoundingClientRect();
+
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
             balls.push(new Ball(x, y));
@@ -65,6 +72,7 @@
 
         function animate() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
+           
             for (let ball of balls) {
             ball.update();
             }
@@ -74,7 +82,6 @@
         animate();
     </script>
 
-</body>
+</body> 
 </html>
-
 
